@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATACA INK — Natha Cadenas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Owners+Narrow:wght@400;700&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0b09;
+    --bone: #f5f0e8;
+    --warm: #e8ddd0;
+    --sage: #8a9e8c;
+    --rust: #c4603a;
+    --blush: #d4a093;
+    --pride-1: #ff6b6b;
+    --pride-2: #ff9f43;
+    --pride-3: #ffd93d;
+    --pride-4: #6bcb77;
+    --pride-5: #4d96ff;
+    --pride-6: #9b59b6;
+    --trans-blue: #55cdfc;
+    --trans-pink: #f7a8b8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--bone);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* === NAV === */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    mix-blend-mode: difference;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--bone);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bone);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .nav-links a:hover { opacity: 1; }
+
+  /* === HERO === */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 8rem 3rem 5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 7vw, 8rem);
+    font-weight: 300;
+    line-height: 0.9;
+    margin-bottom: 0.3rem;
+  }
+
+  .hero-title span {
+    display: block;
+    font-style: italic;
+    color: var(--blush);
+  }
+
+  .hero-sub {
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-top: 1.5rem;
+    opacity: 0.5;
+  }
+
+  .hero-cta {
+    margin-top: 3rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--rust);
+    color: var(--bone);
+    padding: 0.9rem 2rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--blush); transform: translateY(-2px); }
+
+  .btn-ghost {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bone);
+    opacity: 0.6;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(245,240,232,0.3);
+    padding-bottom: 2px;
+    transition: opacity 0.3s;
+  }
+  .btn-ghost:hover { opacity: 1; }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-img-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1410 0%, #2d1f15 40%, #1a1410 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-ink-graphic {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Pride gradient line at bottom of hero */
+  .pride-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+      var(--pride-1), var(--pride-2), var(--pride-3),
+      var(--pride-4), var(--pride-5), var(--pride-6));
+  }
+
+  /* === MARQUEE === */
+  .marquee-wrap {
+    background: var(--rust);
+    padding: 1rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-track {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+  }
+  .marquee-track span {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--bone);
+    padding: 0 2rem;
+    opacity: 0.9;
+  }
+  .marquee-track span.dot { opacity: 0.5; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* === ABOUT === */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 80vh;
+  }
+
+  .about-visual {
+    background: #121009;
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+  }
+
+  .about-visual-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .circle-graphic {
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    border: 1px solid rgba(196,96,58,0.25);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .circle-graphic::before {
+    content: '';
+    position: absolute;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    border: 1px solid rgba(196,96,58,0.15);
+  }
+  .circle-graphic::after {
+    content: '';
+    position: absolute;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,96,58,0.1) 0%, transparent 70%);
+  }
+
+  .monogram {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    font-weight: 300;
+    color: var(--rust);
+    opacity: 0.8;
+    z-index: 1;
+    letter-spacing: 0.05em;
+  }
+
+  .about-content {
+    padding: 6rem 5rem 6rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .section-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 2rem;
+  }
+
+  .about-content h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+
+  .about-content h2 em {
+    font-style: italic;
+    color: var(--blush);
+  }
+
+  .about-content p {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    opacity: 0.75;
+    margin-bottom: 1.2rem;
+    max-width: 480px;
+  }
+
+  /* === QUEER SAFE === */
+  .queer-banner {
+    padding: 5rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: #0f0d0b;
+  }
+
+  .queer-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+      var(--trans-pink), var(--trans-blue), white,
+      var(--trans-blue), var(--trans-pink));
+  }
+
+  .queer-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+      var(--pride-1), var(--pride-2), var(--pride-3),
+      var(--pride-4), var(--pride-5), var(--pride-6));
+  }
+
+  .queer-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--trans-blue);
+    margin-bottom: 1.5rem;
+  }
+
+  .queer-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .queer-title .rainbow {
+    background: linear-gradient(90deg,
+      var(--pride-1), var(--pride-2), var(--pride-3),
+      var(--pride-4), var(--pride-5), var(--pride-6));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .queer-desc {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    opacity: 0.7;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+  }
+
+  .identity-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .pill {
+    padding: 0.4rem 1.2rem;
+    border: 1px solid;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border-radius: 999px;
+  }
+  .pill-1 { border-color: var(--pride-1); color: var(--pride-1); }
+  .pill-2 { border-color: var(--pride-3); color: var(--pride-3); }
+  .pill-3 { border-color: var(--trans-pink); color: var(--trans-pink); }
+  .pill-4 { border-color: var(--trans-blue); color: var(--trans-blue); }
+  .pill-5 { border-color: var(--pride-4); color: var(--pride-4); }
+  .pill-6 { border-color: var(--pride-6); color: var(--pride-6); }
+
+  /* === SERVICES === */
+  .services {
+    padding: 7rem 3rem;
+    background: var(--ink);
+  }
+
+  .services-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .services-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 300;
+    margin-top: 1rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(245,240,232,0.08);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .service-card {
+    background: var(--ink);
+    padding: 3.5rem 2.5rem;
+    transition: background 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card:hover { background: #141210; }
+
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .service-card:nth-child(1)::after { background: var(--rust); }
+  .service-card:nth-child(2)::after { background: var(--sage); }
+  .service-card:nth-child(3)::after { background: var(--blush); }
+  .service-card:hover::after { transform: scaleX(1); }
+
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--rust);
+    opacity: 0.3;
+    margin-bottom: 1.5rem;
+    line-height: 1;
+  }
+
+  .service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .service-card p {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    opacity: 0.6;
+  }
+
+  /* === TRAVEL === */
+  .travel {
+    padding: 7rem 3rem;
+    background: #0a0907;
+  }
+
+  .travel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .travel-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+  }
+
+  .travel-header h2 em { font-style: italic; color: var(--sage); }
+
+  .travel-note {
+    font-size: 0.75rem;
+    opacity: 0.5;
+    text-align: right;
+    max-width: 200px;
+    line-height: 1.6;
+  }
+
+  .destinations-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .dest-card {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .dest-bg {
+    position: absolute;
+    inset: 0;
+    transition: transform 0.6s ease;
+  }
+  .dest-card:hover .dest-bg { transform: scale(1.05); }
+
+  .dest-bg-rio { background: linear-gradient(160deg, #2d1a0e, #8c4a1c, #2d1a0e); }
+  .dest-bg-spain { background: linear-gradient(160deg, #1a1a2e, #c9302c, #1a1a2e); }
+  .dest-bg-france { background: linear-gradient(160deg, #0d1b2a, #2563a8, #0d1b2a); }
+  .dest-bg-italy { background: linear-gradient(160deg, #1a2e1a, #1a7a3c, #1a2e1a); }
+
+  .dest-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 40%, transparent);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+  }
+
+  .dest-status {
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .status-active { color: var(--pride-4); }
+  .status-soon { color: var(--pride-3); }
+  .status-coming { color: rgba(245,240,232,0.4); }
+
+  .dest-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+
+  .dest-cities {
+    font-size: 0.7rem;
+    opacity: 0.5;
+    margin-top: 0.3rem;
+  }
+
+  .travel-more {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 1rem auto 0;
+  }
+
+  .dest-mini {
+    padding: 1rem 1.2rem;
+    border: 1px solid rgba(245,240,232,0.1);
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0.5;
+  }
+  .dest-mini span { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; }
+
+  /* === BOOKING === */
+  .booking {
+    padding: 8rem 3rem;
+    background: #0d0b09;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .booking-left {}
+
+  .booking-left h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+
+  .booking-left h2 em { font-style: italic; color: var(--rust); }
+
+  .booking-left p {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    opacity: 0.65;
+    margin-bottom: 1rem;
+  }
+
+  .booking-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: rgba(245,240,232,0.08);
+  }
+
+  .booking-step {
+    background: var(--ink);
+    padding: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    transition: background 0.3s;
+  }
+  .booking-step:hover { background: #161310; }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: var(--rust);
+    opacity: 0.5;
+    flex-shrink: 0;
+    line-height: 1;
+    width: 2rem;
+  }
+
+  .step-content h4 {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .step-content p {
+    font-size: 0.8rem;
+    opacity: 0.55;
+    line-height: 1.7;
+  }
+
+  /* === CONTACT === */
+  .contact {
+    background: var(--rust);
+    padding: 7rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact::before {
+    content: 'ATACA';
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20rem;
+    font-weight: 300;
+    color: rgba(0,0,0,0.1);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: -0.05em;
+  }
+
+  .contact .section-label { color: rgba(245,240,232,0.7); }
+
+  .contact h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    color: var(--bone);
+  }
+
+  .contact h2 em { font-style: italic; }
+
+  .contact p {
+    font-size: 0.9rem;
+    color: var(--bone);
+    opacity: 0.8;
+    max-width: 500px;
+    margin: 0 auto 3rem;
+    line-height: 1.8;
+  }
+
+  .contact-btns {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-dark {
+    background: var(--ink);
+    color: var(--bone);
+    padding: 1rem 2.5rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s;
+    display: inline-block;
+  }
+  .btn-dark:hover { background: #1a1410; }
+
+  .btn-outline {
+    border: 1px solid var(--bone);
+    color: var(--bone);
+    padding: 1rem 2.5rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s;
+    display: inline-block;
+  }
+  .btn-outline:hover { background: rgba(245,240,232,0.1); }
+
+  /* === FOOTER === */
+  footer {
+    background: #080706;
+    padding: 4rem 3rem 2rem;
+  }
+
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(245,240,232,0.08);
+  }
+
+  .footer-brand h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+  }
+
+  .footer-brand p {
+    font-size: 0.7rem;
+    opacity: 0.4;
+    margin-top: 0.5rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .footer-links h5 {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.4;
+    margin-bottom: 1.2rem;
+  }
+
+  .footer-links ul { list-style: none; }
+  .footer-links li { margin-bottom: 0.6rem; }
+  .footer-links a {
+    font-size: 0.85rem;
+    color: var(--bone);
+    opacity: 0.6;
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  .footer-links a:hover { opacity: 1; }
+
+  .footer-social {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .social-link {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--bone);
+    opacity: 0.5;
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  .social-link:hover { opacity: 1; }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-bottom p {
+    font-size: 0.7rem;
+    opacity: 0.3;
+  }
+
+  .pride-strip {
+    display: flex;
+    gap: 4px;
+  }
+
+  .pride-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+
+  /* === WAITLIST === */
+  .waitlist {
+    background: #0f0d0b;
+    padding: 8rem 3rem;
+    border-top: 1px solid rgba(245,240,232,0.06);
+  }
+
+  .waitlist-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  .waitlist-left h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .waitlist-left h2 em { font-style: italic; color: var(--blush); }
+
+  .waitlist-left p {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    opacity: 0.65;
+    margin-bottom: 2rem;
+  }
+
+  .waitlist-promise {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .waitlist-promise span {
+    font-size: 0.72rem;
+    opacity: 0.45;
+    letter-spacing: 0.05em;
+  }
+
+  .waitlist-right {
+    background: #161310;
+    padding: 2.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.4rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group .optional {
+    text-transform: none;
+    letter-spacing: 0;
+    opacity: 0.6;
+    font-size: 0.65rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    background: rgba(245,240,232,0.04);
+    border: 1px solid rgba(245,240,232,0.1);
+    color: var(--bone);
+    padding: 0.75rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.3s;
+    resize: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--rust);
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    opacity: 0.3;
+  }
+
+  .form-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-check input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    accent-color: var(--rust);
+    cursor: pointer;
+  }
+
+  .form-check label {
+    font-size: 0.78rem;
+    opacity: 0.6;
+    line-height: 1.5;
+    cursor: pointer;
+  }
+
+  .btn-waitlist {
+    width: 100%;
+    background: var(--rust);
+    color: var(--bone);
+    border: none;
+    padding: 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .btn-waitlist:hover { background: var(--blush); }
+
+  .form-privacy {
+    font-size: 0.65rem;
+    opacity: 0.3;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .waitlist-success {
+    text-align: center;
+    padding: 3rem 1rem;
+  }
+
+  .success-icon {
+    font-size: 2.5rem;
+    color: var(--rust);
+    margin-bottom: 1.5rem;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .waitlist-success h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+  }
+
+  .waitlist-success p {
+    font-size: 0.85rem;
+    opacity: 0.6;
+    line-height: 1.8;
+  }
+
+  .form-error {
+    border-color: #c44a3a !important;
+  }
+
+  .error-msg {
+    font-size: 0.65rem;
+    color: #c44a3a;
+    margin-top: 0.3rem;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .waitlist { padding: 5rem 1.5rem; }
+    .waitlist-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .waitlist-right { padding: 1.5rem; }
+  }
+
+  /* === ANIMATIONS === */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 7rem 1.5rem 4rem; }
+
+    .about { grid-template-columns: 1fr; }
+    .about-visual { min-height: 300px; }
+    .about-content { padding: 3rem 1.5rem; }
+
+    .services { padding: 5rem 1.5rem; }
+    .services-grid { grid-template-columns: 1fr; }
+
+    .travel { padding: 5rem 1.5rem; }
+    .travel-header { flex-direction: column; gap: 1rem; }
+    .destinations-grid { grid-template-columns: 1fr 1fr; }
+    .travel-more { grid-template-columns: 1fr 1fr; }
+
+    .booking { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 1.5rem; }
+
+    .contact { padding: 5rem 1.5rem; }
+    .contact::before { font-size: 8rem; }
+
+    footer { padding: 3rem 1.5rem 2rem; }
+    .footer-top { flex-direction: column; gap: 2.5rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">ATACA INK</a>
+  <ul class="nav-links">
+    <li><a href="#about">Sobre mí</a></li>
+    <li><a href="#services">Servicios</a></li>
+    <li><a href="#travels">Viajes</a></li>
+    <li><a href="#booking">Reservar</a></li>
+    <li><a href="#waitlist">Lista de espera</a></li>
+    <li><a href="#contact">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow fade-up">Tatuajes con historia · Espacios seguros</p>
+    <h1 class="hero-title fade-up">
+      ATACA
+      <span>.INK</span>
+    </h1>
+    <p class="hero-sub fade-up">Natha Cadenas · Tatuadora itinerante</p>
+    <div class="hero-cta fade-up">
+      <a href="#booking" class="btn-primary">Reservar cita</a>
+      <a href="#about" class="btn-ghost">Conocer más</a>
+    </div>
+    <div class="pride-bar"></div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-placeholder">
+      <svg class="hero-ink-graphic" viewBox="0 0 600 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Abstract tattoo-inspired linework -->
+        <circle cx="300" cy="400" r="200" stroke="rgba(196,96,58,0.15)" stroke-width="1"/>
+        <circle cx="300" cy="400" r="160" stroke="rgba(196,96,58,0.1)" stroke-width="1"/>
+        <circle cx="300" cy="400" r="280" stroke="rgba(196,96,58,0.07)" stroke-width="1"/>
+        <!-- Abstract flowing lines -->
+        <path d="M 150 200 Q 300 100 450 200 Q 500 350 400 500 Q 300 600 200 500 Q 100 350 150 200" stroke="rgba(212,160,147,0.2)" stroke-width="1" fill="none"/>
+        <path d="M 180 230 Q 300 140 420 230 Q 465 360 370 480 Q 300 570 230 480 Q 135 360 180 230" stroke="rgba(212,160,147,0.1)" stroke-width="1" fill="none"/>
+        <!-- Needle/compass motif -->
+        <line x1="300" y1="200" x2="300" y2="600" stroke="rgba(196,96,58,0.1)" stroke-width="1"/>
+        <line x1="100" y1="400" x2="500" y2="400" stroke="rgba(196,96,58,0.1)" stroke-width="1"/>
+        <!-- Small diamond -->
+        <path d="M 300 340 L 330 370 L 300 400 L 270 370 Z" stroke="rgba(196,96,58,0.3)" stroke-width="1" fill="none"/>
+        <!-- Pride colors — small dots -->
+        <circle cx="220" cy="300" r="3" fill="rgba(255,107,107,0.4)"/>
+        <circle cx="240" cy="285" r="3" fill="rgba(255,159,67,0.4)"/>
+        <circle cx="260" cy="275" r="3" fill="rgba(255,217,61,0.4)"/>
+        <circle cx="280" cy="270" r="3" fill="rgba(107,203,119,0.4)"/>
+        <circle cx="300" cy="268" r="3" fill="rgba(77,150,255,0.4)"/>
+        <circle cx="320" cy="270" r="3" fill="rgba(155,89,182,0.4)"/>
+        <!-- Trans colors -->
+        <circle cx="340" cy="275" r="3" fill="rgba(85,205,252,0.4)"/>
+        <circle cx="360" cy="285" r="3" fill="rgba(247,168,184,0.4)"/>
+        <circle cx="380" cy="300" r="3" fill="rgba(245,240,232,0.2)"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>TATTOOING THE WORLD</span><span class="dot">♦</span>
+    <span>RÍO DE JANEIRO</span><span class="dot">♦</span>
+    <span>MADRID</span><span class="dot">♦</span>
+    <span>PARIS</span><span class="dot">♦</span>
+    <span>ROMA</span><span class="dot">♦</span>
+    <span>ATENAS</span><span class="dot">♦</span>
+    <span>ESPACIO SEGURO LGBTQI+</span><span class="dot">♦</span>
+    <span>ARTE QUE VIAJA</span><span class="dot">♦</span>
+    <span>TATTOOING THE WORLD</span><span class="dot">♦</span>
+    <span>RÍO DE JANEIRO</span><span class="dot">♦</span>
+    <span>MADRID</span><span class="dot">♦</span>
+    <span>PARIS</span><span class="dot">♦</span>
+    <span>ROMA</span><span class="dot">♦</span>
+    <span>ATENAS</span><span class="dot">♦</span>
+    <span>ESPACIO SEGURO LGBTQI+</span><span class="dot">♦</span>
+    <span>ARTE QUE VIAJA</span><span class="dot">♦</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-visual">
+    <div class="about-visual-inner">
+      <div class="circle-graphic">
+        <div class="monogram">NC</div>
+      </div>
+    </div>
+  </div>
+  <div class="about-content">
+    <p class="section-label fade-up">Sobre mí</p>
+    <h2 class="fade-up">Arte que <em>nace</em> de vivir diferente</h2>
+    <p class="fade-up">Soy Natha Cadenas — artista, tatuadora y nómada digital. Hace un año cerré mi local físico para hacer lo que siempre quise: tatuar mientras recorro el mundo.</p>
+    <p class="fade-up">Mi marca, ATACA INK, nació desde una búsqueda profunda: construir una vida con libertad geográfica, propósito y coherencia entre quién soy, lo que creo y cómo genero ingresos.</p>
+    <p class="fade-up">Cada tatuaje es una historia. El tuyo también lo será.</p>
+    <div class="fade-up" style="margin-top:2.5rem;">
+      <a href="#contact" class="btn-primary">Trabajemos juntos</a>
+    </div>
+  </div>
+</section>
+
+<!-- QUEER SAFE SPACE -->
+<section class="queer-banner">
+  <p class="queer-label fade-up">Espacio seguro · Safe space</p>
+  <h2 class="queer-title fade-up">Un estudio para <span class="rainbow">todas las identidades</span></h2>
+  <p class="queer-desc fade-up">ATACA INK es un espacio de bienvenida para la comunidad LGBTQI+. Personas queer, lesbianas, gays, trans, no binarias y aliadas — aquí tu identidad es celebrada, no tolerada.</p>
+  <div class="identity-pills fade-up">
+    <span class="pill pill-1">Lesbianas</span>
+    <span class="pill pill-2">Gays</span>
+    <span class="pill pill-3">Trans</span>
+    <span class="pill pill-4">No Binaries</span>
+    <span class="pill pill-5">Bisexuales</span>
+    <span class="pill pill-6">Queer</span>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header">
+    <p class="section-label fade-up">Lo que ofrezco</p>
+    <h2 class="fade-up">Arte hecho a medida,<br>en cualquier ciudad</h2>
+  </div>
+  <div class="services-grid fade-up">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <h3>Diseño personalizado</h3>
+      <p>Cada pieza es única. Trabajamos juntos desde la idea hasta el boceto final. Mi estilo combina líneas finas, elementos orgánicos y narrativa personal.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <h3>Flash days</h3>
+      <p>Cuando llego a una ciudad nueva, organizo días de diseños predefinidos. Perfectos para quienes quieren algo especial pero no saben por dónde empezar.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <h3>Cobertura & retoques</h3>
+      <p>¿Tienes un tatuaje que ya no te representa? Diseñamos juntos una nueva historia sobre él. También ofrezco retoques de trabajos previos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRAVEL MAP -->
+<section class="travel" id="travels">
+  <div class="travel-header fade-up">
+    <div>
+      <p class="section-label">Dónde estoy</p>
+      <h2>Tattooing<br><em>el mundo</em></h2>
+    </div>
+    <p class="travel-note">Las fechas y ciudades se confirman según demanda. Seguime en Instagram para novedades.</p>
+  </div>
+
+  <div class="destinations-grid fade-up">
+    <div class="dest-card">
+      <div class="dest-bg dest-bg-rio"></div>
+      <div class="dest-overlay">
+        <span class="dest-status status-active">✓ Completado</span>
+        <div class="dest-name">Brasil</div>
+        <div class="dest-cities">Río de Janeiro</div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-bg dest-bg-spain"></div>
+      <div class="dest-overlay">
+        <span class="dest-status status-soon">→ Próximo</span>
+        <div class="dest-name">España</div>
+        <div class="dest-cities">Ciudades por confirmar</div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-bg dest-bg-france"></div>
+      <div class="dest-overlay">
+        <span class="dest-status status-coming">Pronto</span>
+        <div class="dest-name">Francia</div>
+        <div class="dest-cities">Ciudades por confirmar</div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-bg dest-bg-italy"></div>
+      <div class="dest-overlay">
+        <span class="dest-status status-coming">Pronto</span>
+        <div class="dest-name">Italia</div>
+        <div class="dest-cities">Ciudades por confirmar</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="travel-more fade-up" style="margin-top:1rem;">
+    <div class="dest-mini">Grecia <span>Por confirmar</span></div>
+    <div class="dest-mini">Irlanda <span>Por confirmar</span></div>
+    <div class="dest-mini">Suiza <span>Por confirmar</span></div>
+    <div class="dest-mini">Nueva Zelanda <span>Por confirmar</span></div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking" style="background:#0d0b09; padding:0 3rem;">
+  <div class="booking">
+    <div class="booking-left fade-up">
+      <p class="section-label">Reservas</p>
+      <h2>¿Querés tatuarte cuando esté en tu <em>ciudad?</em></h2>
+      <p>Las citas se abren con anticipación cuando confirmo mi llegada a cada lugar. La mejor manera de no perderte es estar en la lista de espera o seguirme en Instagram.</p>
+      <p style="margin-top:1rem;">
+        <a href="#contact" class="btn-primary">Anotarme en lista de espera</a>
+      </p>
+    </div>
+    <div class="booking-right fade-up">
+      <div class="booking-step">
+        <span class="step-num">01</span>
+        <div class="step-content">
+          <h4>Seguime en Instagram</h4>
+          <p>Anuncio cada ciudad con anticipación. Primera fuente de novedades.</p>
+        </div>
+      </div>
+      <div class="booking-step">
+        <span class="step-num">02</span>
+        <div class="step-content">
+          <h4>Entrar en lista de espera</h4>
+          <p>Dejá tu mail y ciudad. Te aviso cuando confirme fechas cerca tuyo.</p>
+        </div>
+      </div>
+      <div class="booking-step">
+        <span class="step-num">03</span>
+        <div class="step-content">
+          <h4>Consulta de diseño</h4>
+          <p>Hablamos por DM o mail sobre tu idea, estilo y referencias.</p>
+        </div>
+      </div>
+      <div class="booking-step">
+        <span class="step-num">04</span>
+        <div class="step-content">
+          <h4>Nos tatuamos</h4>
+          <p>Sesión en un espacio seguro, cuidado y con toda mi atención.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section class="waitlist" id="waitlist">
+  <div class="waitlist-inner">
+    <div class="waitlist-left">
+      <p class="section-label fade-up">Lista de espera</p>
+      <h2 class="fade-up">¿Quiero tatuarme<br>cuando llegues<br>a mi <em>ciudad</em></h2>
+      <p class="fade-up">Dejá tu mail y ciudad. Cuando confirme fechas cerca tuyo, sos la primera en saberlo.</p>
+      <div class="waitlist-promise fade-up">
+        <span>✦ Sin spam</span>
+        <span>✦ Solo te escribo cuando tengo fechas reales</span>
+        <span>✦ Podés darte de baja cuando quieras</span>
+      </div>
+    </div>
+    <div class="waitlist-right fade-up">
+      <div class="waitlist-form" id="waitlistForm">
+        <div class="form-group">
+          <label>Tu nombre</label>
+          <input type="text" id="wl-name" placeholder="Cómo te llamás" />
+        </div>
+        <div class="form-group">
+          <label>Mail</label>
+          <input type="email" id="wl-email" placeholder="tu@mail.com" />
+        </div>
+        <div class="form-group">
+          <label>Ciudad / País</label>
+          <input type="text" id="wl-city" placeholder="Ej: Madrid, España" />
+        </div>
+        <div class="form-group">
+          <label>¿Tenés alguna idea en mente? <span class="optional">(opcional)</span></label>
+          <textarea id="wl-idea" placeholder="Describí qué tipo de tatuaje querés, estilo, zona del cuerpo..." rows="3"></textarea>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" id="wl-lgbtqi" />
+          <label for="wl-lgbtqi">Soy parte o simpatizante de la comunidad LGBTQI+ 🏳️‍🌈</label>
+        </div>
+        <button class="btn-waitlist" onclick="submitWaitlist()">Anotarme a la lista</button>
+        <p class="form-privacy">Tu información es privada y nunca será compartida.</p>
+      </div>
+      <div class="waitlist-success" id="waitlistSuccess" style="display:none;">
+        <div class="success-icon">✦</div>
+        <h3>¡Ya estás en la lista!</h3>
+        <p>Te escribo en cuanto confirme fechas cerca de vos. Seguime en Instagram para novedades antes.</p>
+        <a href="https://instagram.com/ataca.ink" target="_blank" class="btn-primary" style="margin-top:1.5rem;display:inline-block;">@ataca.ink</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <p class="section-label fade-up">Contacto</p>
+  <h2 class="fade-up">Hagamos algo <em>bello</em><br>juntos.</h2>
+  <p class="fade-up">¿Querés un tatuaje, colaborar, o simplemente saber cuándo llego a tu ciudad? Escribime.</p>
+  <div class="contact-btns fade-up">
+    <a href="mailto:ataca.studio.ar@gmail.com" class="btn-dark">ataca.studio.ar@gmail.com</a>
+    <a href="https://instagram.com/ataca.ink" target="_blank" class="btn-outline">@ataca.ink en Instagram</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h3>ATACA INK</h3>
+      <p>Viajar · Crear · Inspirar</p>
+    </div>
+    <div class="footer-links">
+      <h5>Navegación</h5>
+      <ul>
+        <li><a href="#about">Sobre mí</a></li>
+        <li><a href="#services">Servicios</a></li>
+        <li><a href="#travels">Viajes</a></li>
+        <li><a href="#booking">Reservas</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-links">
+        <h5>Redes</h5>
+        <div class="footer-social">
+          <a href="#" class="social-link">Instagram</a>
+          <a href="#" class="social-link">TikTok</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 ATACA INK · Natha Cadenas · Todos los derechos reservados</p>
+    <div class="pride-strip">
+      <div class="pride-dot" style="background:var(--pride-1)"></div>
+      <div class="pride-dot" style="background:var(--pride-2)"></div>
+      <div class="pride-dot" style="background:var(--pride-3)"></div>
+      <div class="pride-dot" style="background:var(--pride-4)"></div>
+      <div class="pride-dot" style="background:var(--pride-5)"></div>
+      <div class="pride-dot" style="background:var(--pride-6)"></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Intersection Observer for fade-up animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, entry.target.dataset.delay || 0);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  function submitWaitlist() {
+    const name = document.getElementById('wl-name');
+    const email = document.getElementById('wl-email');
+    const city = document.getElementById('wl-city');
+    let valid = true;
+
+    // Clear previous errors
+    document.querySelectorAll('.error-msg').forEach(e => e.remove());
+    [name, email, city].forEach(f => f.classList.remove('form-error'));
+
+    if (!name.value.trim()) {
+      name.classList.add('form-error');
+      name.insertAdjacentHTML('afterend', '<span class="error-msg">Por favor ingresá tu nombre</span>');
+      valid = false;
+    }
+    if (!email.value.trim() || !email.value.includes('@')) {
+      email.classList.add('form-error');
+      email.insertAdjacentHTML('afterend', '<span class="error-msg">Ingresá un mail válido</span>');
+      valid = false;
+    }
+    if (!city.value.trim()) {
+      city.classList.add('form-error');
+      city.insertAdjacentHTML('afterend', '<span class="error-msg">Indicá tu ciudad</span>');
+      valid = false;
+    }
+
+    if (!valid) return;
+
+    // Show success
+    document.getElementById('waitlistForm').style.display = 'none';
+    document.getElementById('waitlistSuccess').style.display = 'block';
+
+    // Here you'd normally send to a backend / Mailchimp / etc.
+    console.log('Waitlist entry:', {
+      name: name.value,
+      email: email.value,
+      city: city.value,
+      idea: document.getElementById('wl-idea').value,
+      lgbtqi: document.getElementById('wl-lgbtqi').checked
+    });
+  }
+
+  document.querySelectorAll('.fade-up').forEach((el, i) => {
+    // Stagger siblings
+    const siblings = el.parentElement.querySelectorAll('.fade-up');
+    const idx = Array.from(siblings).indexOf(el);
+    el.dataset.delay = idx * 80;
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
